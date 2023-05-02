@@ -1,0 +1,45 @@
+@use '@/styles/variables.scss' as v;
+.mainInner{
+    max-width: 1000px;
+    width: 1000px;
+    margin: 0 auto;
+    .mainText{
+        text-align: center;
+        margin-top: 32px;
+        color: v.$main_text_color;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+    .resultInner{
+        .resultIcon{
+            font-size: 100px;
+            text-align: center;
+        }
+        .resultScore{
+            text-align: center;
+            text-shadow: 2px 2px 1px rgba(244,33,33,0.33);
+            color: #fff;
+            font-size: 60px;
+            margin-bottom: 100px;
+        }
+    }
+    .backtop{
+        width: 150px;
+        padding: 5px 16px 6px 16px;
+        font-size: 18px;
+        border-radius: 50px;
+        background: v.$main_bg;
+        border: unset;
+        box-shadow: v.$main_boxShadow;
+        transition: all .2s;
+        display: block;
+        color: v.$main_text_color;
+        text-align: center;
+        margin: 0 auto;
+        &:hover{
+            color: rgba(244, 33, 33, 0.33);
+        }
+    }
+
+}
+
