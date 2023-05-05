@@ -13,9 +13,9 @@ export default function Home() {
 
   return (
     <>
-      {/* <p onClick={createUser}>user生成</p>
+      <p onClick={createUser}>user生成</p>
       <p onClick={confirmation}>userを確認</p>
-      <p onClick={deleteUser}>userを削除</p> */}
+      <p onClick={deleteUser}>userを削除</p>
       <Header/>
       <main>  
         <SiteTitle/>
