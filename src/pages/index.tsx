@@ -5,6 +5,7 @@ import { Header } from "@/components/Layout/Header/Header"
 import { Footer } from "@/components/Layout/Footer/Footer"
 import { SelectButton } from "@/components/Ui/SelectButton/SelectButton"
 import { createUser, deleteUser,confirmation } from "@/hooks/user"
+import Link from "next/link"
 
 
 
@@ -24,7 +25,10 @@ export default function Home() {
           <div className={styles.selectWrap}>
             <p className={styles.selectWrapText}>カテゴリを選択してください。</p>
             <div className={styles.selectWrapButtons}>
-              <SelectButton children="seo"/>
+              <Link href='quiz/countDown'>
+                <SelectButton children="seo"/>
+              </Link>
+            
               <SelectButton children="marketing"/>
             </div>
           </div>
