@@ -1,6 +1,7 @@
 
 import { User } from "@/types/user";
 
+// 以下のコードはutilsに入れた方がいいかも
 //userデータを生成する
 export const createUser = ()=>{
     const userId = sessionStorage.getItem('userId')?? Math.random().toString(32).substring(2);
