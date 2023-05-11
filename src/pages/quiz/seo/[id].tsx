@@ -13,32 +13,44 @@ type Props ={
 //型定義直す
 export default function QuizID({id}:Props) {
   const [question, setQuestion] = useState(null);
-  const count = useTimer();
+  const [choice, setChoice] = useState([]);
+  // const count = useTimer();
 
   useEffect(()=>{
-    fetchQuestion()
+    fetchQuestion();
     console.log('レンダリングされた');
   },[id])
   async function fetchQuestion() {
-    const {data:question} = await supabase.from('random_questions').select('*').limit(1);
-    if(question === null){
+    const {data:questions} = await supabase.from('random_questions').select('*').limit(1);
+    if(questions === null){
       console.log('問題が取得できませんでした')
       setQuestion(null);
     }else{
-      setQuestion(question[0]);
+      setQuestion(questions[0].question)
+      console.log(questions[0].id)
+      const {data:choices} = await supabase.from('choice').select('*').eq('question_id',questions[0].id);
+      const {data:choiceText} = await supabase.from('choice').select('choice_text').eq('question_id',questions[0].id);
+      const choiceTexts = choiceText.map((choice) => choice.choice_text);
+      setChoice(choiceTexts)
+      console.log(choiceTexts)
     }
-
-    // console.log(question)
   }
+
+
+
   return(
     <>
-      {/* <h1>{questionNumber}</h1> */}
-      {question ? (
-        <p>{question.question}</p>
-      ) : (
-        <p></p>
-      )}
-      <p>{count}</p>
+    <p>{question}</p>
+    <ul>
+      {choice.map((text)=>(
+        <li>{text}</li>
+      ))}
+    </ul>
+
+
+
+      {/* <p>{count}</p> */}
+
     </>
   )
 }
