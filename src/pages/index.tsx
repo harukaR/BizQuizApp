@@ -4,7 +4,7 @@ import { SiteTitle } from '@/components/Layout/SiteTitle/SiteTitle'
 import { Header } from "@/components/Layout/Header/Header"
 import { Footer } from "@/components/Layout/Footer/Footer"
 import { SelectButton } from "@/components/Ui/SelectButton/SelectButton"
-import { createUser, deleteUser,confirmation } from "@/hooks/user"
+import { createUser, deleteUser,confirmation } from "@/hooks/userData"
 import Link from "next/link"
 
 
