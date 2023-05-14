@@ -3,6 +3,7 @@ import { useEffect, useState, } from "react";
 import supabase from "../../../../utils/supabase";
 import { useRouter } from "next/router";
 import { useTimer } from "@/hooks/useTimer";
+import { createUser, deleteUser,confirmation } from "@/hooks/userData"
 
 type Props ={
   id:string;
@@ -14,6 +15,7 @@ type Props ={
 export default function QuizID({id}:Props) {
   const [question, setQuestion] = useState(null);
   const [choice, setChoice] = useState([]);
+
   // const count = useTimer();
 
   useEffect(()=>{
@@ -30,11 +32,35 @@ export default function QuizID({id}:Props) {
       console.log(questions[0].id)
       const {data:choices} = await supabase.from('choice').select('*').eq('question_id',questions[0].id);
       const {data:choiceText} = await supabase.from('choice').select('choice_text').eq('question_id',questions[0].id);
-      const choiceTexts = choiceText.map((choice) => choice.choice_text);
-      setChoice(choiceTexts)
-      console.log(choiceTexts)
+      // const choiceTexts = choiceText.map((choice) => choice.choice_text); 
+      // setChoice(choiceTexts)
+      // console.log(choiceTexts)
+      setChoice(choices)
+      
     }
   }
+  const judge = (e)=>{
+
+    // 選択した要素が正解かどうか取得
+    const selectedText = e.target.innerText;
+    const selectedChoice = choice.find((item)=> item.choice_text === selectedText)
+    const isCorrect = selectedChoice.is_correct;
+    console.log(isCorrect)
+
+    const userData = createUser()
+    console.log(userData)
+    const currentScore = sessionStorage.getItem('userScore')
+
+
+    if(!isCorrect){
+      console.log('不正解')
+      const userScore = Number(localStorage.getItem('userScore') || 10);
+      localStorage.setItem('userScore', String(userScore - 1));
+      console.log(userScore)
+      return
+    }
+  }
+
 
 
 
@@ -42,10 +68,11 @@ export default function QuizID({id}:Props) {
     <>
     <p>{question}</p>
     <ul>
-      {choice.map((text)=>(
-        <li>{text}</li>
+      {choice.map((item)=>(
+        <li key={item.id} onClick={judge}>{item.choice_text}</li>
       ))}
     </ul>
+
 
 
 
